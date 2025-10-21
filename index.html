@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ceylon Trips & Clicks — Discover Sri Lanka</title>
+  <meta name="description" content="Ceylon Trips & Clicks — curated holiday deals across Sri Lanka. Book via email or WhatsApp." />
+  <link rel="icon" href="https://assets.codepen.io/605876/placeholder-favicon.png">
+
+  <style>
+    :root{
+      --bg:#f4fbff;
+      --hero-gradient: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.6));
+      --primary:#2ea8e6; /* sky blue */
+      --accent:#ffb86b;  /* warm accent */
+      --muted:#6b7280;
+      --card:#ffffff;
+      --radius:14px;
+      --gap:18px;
+      --maxw:1180px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:#09303b;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);-webkit-font-smoothing:antialiased}
+    a{color:var(--primary);text-decoration:none}
+    img{max-width:100%;height:auto;display:block}
+    .container{max-width:var(--maxw);margin:0 auto;padding:26px}
+
+    /* NAV */
+header {
+  position: sticky;
+  top: 0;
+  background: transparent;
+  z-index: 50;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), #9be6ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 18px;
+  box-shadow: 0 8px 28px rgba(46, 168, 230, 0.12);
+}
+
+/* 🔹 Increased gap for wider spacing between nav items */
+nav ul {
+  display: flex;
+  gap: 28px; /* was 14px — doubled for better spacing */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  font-weight: 700;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.cta {
+  background: linear-gradient(90deg, var(--primary), #18d1ff);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 800;
+  box-shadow: 0 8px 24px rgba(46, 168, 230, 0.12);
+}
+
+.ghost {
+  background: transparent;
+  border: 1px solid rgba(9, 48, 59, 0.06);
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+
+    /* Logo */
+.logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 8px 28px rgba(46,168,230,0.12);
+}
+
+    /* HERO - collage style background */
+.hero {
+  margin-top:16px;
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+  display:grid;
+  grid-template-columns:64% 34%;
+  gap:2%;
+  box-shadow:0 16px 50px rgba(12,40,45,0.06);
+  
+  /* Keep only your real image background */
+  background-image: 
+    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600&auto=format&fit=crop'),
+    url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop'),
+    url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=1600&auto=format&fit=crop');
+  
+  background-size: cover;
+  background-position: center;
+  padding: 34px;
+}
+
+    .hero-left h1{font-size:40px;margin:6px 0 10px;color:#052a2b}
+    .hero-left p{color:var(--muted);margin:0 0 14px}
+    .search-card{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(9,48,59,0.04);box-shadow:0 10px 30px rgba(10,34,36,0.04)}
+    .search-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .field{display:flex;flex-direction:column;gap:6px;font-size:13px}
+    .field label{font-weight:700;color:#063238}
+    input,select,textarea{padding:10px;border-radius:9px;border:1px solid rgba(9,48,59,0.06);font-size:14px}
+    .btn{padding:10px 14px;border-radius:10px;font-weight:800;border:0;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--primary),#18d1ff);color:white}
+    .btn-outline{background:transparent;border:1px solid rgba(9,48,59,0.06);color:#063238}
+
+    .hero-right{display:flex;flex-direction:column;gap:12px}
+    .hero-feature{background:linear-gradient(180deg,#fff,#fbffff);padding:12px;border-radius:12px;border:1px solid rgba(9,48,59,0.04)}
+    .hero-feature .price{font-weight:900;font-size:20px;color:#08343b}
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .tag{padding:8px 12px;border-radius:999px;background:rgba(9,48,59,0.04);font-weight:700;color:#063238;font-size:13px}
+
+    /* Sections */
+    .section{margin-top:34px}
+    .section h2{margin:0 0 6px;font-size:22px;color:#062e31}
+    .muted{color:var(--muted);font-size:14px}
+
+    /* Deals grid */
+    .deals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:12px}
+    .deal{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid rgba(9,48,59,0.04);box-shadow:0 12px 30px rgba(10,34,36,0.04)}
+    .deal .media{height:160px;background-size:cover;background-position:center}
+    .deal .body{padding:12px}
+    .deal .title{font-weight:900;margin:6px 0}
+    .price-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+    .pill{padding:6px 8px;border-radius:10px;border:1px solid rgba(9,48,59,0.04);font-weight:800}
+
+    /* Cities */
+    .cities{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
+    .city{height:120px;border-radius:12px;overflow:hidden;position:relative;background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:12px;color:white;font-weight:900}
+    .city::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.35));border-radius:12px}
+    .city span{position:relative;z-index:2}
+
+    /* Promo */
+    .promo{display:flex;align-items:center;justify-content:space-between;padding:16px;border-radius:12px;background:linear-gradient(90deg,#fff6ef,#f8feff);border:1px solid rgba(9,48,59,0.03);margin-top:18px}
+
+    /* Features */
+    .features{display:flex;gap:12px;margin-top:12px}
+    .feature{flex:1;background:var(--card);padding:12px;border-radius:10px;border:1px solid rgba(9,48,59,0.04);display:flex;gap:10px;align-items:center}
+    .feature .icon{width:44px;height:44;border-radius:10px;background:linear-gradient(180deg,#e6f9ff,#dffcff);display:grid;place-items:center;font-weight:900;color:#063238}
+
+    /* Blogs */
+    .blogs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+    .blog{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid rgba(9,48,59,0.04)}
+    .blog img{width:100%;height:140px;object-fit:cover}
+    .blog .txt{padding:12px}
+
+    /* Testimonials */
+    .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    .test{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(9,48,59,0.04)}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:16px;margin-top:12px}
+    .contact-card{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(9,48,59,0.04)}
+
+    /* Footer */
+    footer{margin-top:28px;padding:20px;border-radius:10px;background:linear-gradient(180deg,#f8feff,#ffffff);border:1px solid rgba(9,48,59,0.03)}
+    .footer-grid{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+    /* Responsive */
+    @media (max-width:1050px){
+      .deals-grid{grid-template-columns:repeat(2,1fr)}
+      .cities{grid-template-columns:repeat(3,1fr)}
+      .blogs{grid-template-columns:repeat(2,1fr)}
+      .testimonials{grid-template-columns:repeat(2,1fr)}
+      .hero{grid-template-columns:1fr}
+    }
+    @media (max-width:720px){
+      nav ul{display:none}
+      .deals-grid{grid-template-columns:1fr}
+      .cities{grid-template-columns:repeat(2,1fr)}
+      .blogs{grid-template-columns:1fr}
+      .testimonials{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      .hero-left h1{font-size:26px}
+      .container{padding:16px}
+      .logo{width:48px;height:48px}
+    }
+
+    /* utilities */
+    .muted-small{color:var(--muted);font-size:13px}
+    .center{display:flex;align-items:center;justify-content:center}
+    .socials{display:flex;gap:8px}
+    .icon-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:10px;background:transparent;border:1px solid rgba(9,48,59,0.06);font-weight:800}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <img class="logo" src="./assets/CeylonTrips&Clicks.jpg" alt="Ceylon Trips & Clicks Logo">
+        <div>
+          <div style="font-weight:900;font-size:16px">Ceylon Trips & Clicks</div>
+          <div style="font-size:13px;color:var(--muted)">Curated tours across Sri Lanka</div>
+        </div>
+      </div>
+
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="#deals">Deals</a></li>
+          <li><a href="#cities">Cities</a></li>
+          <li><a href="#blogs">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex;gap:10px;align-items:center">
+        <a class="ghost" href="https://www.facebook.com/profile.php?id=61577853503752&mibextid=ZbWKwL" target="_blank" rel="noopener">Facebook</a>
+        <a class="cta" href="#contact">Book Now</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero - travel collage style">
+      <div class="hero-left">
+        <div style="display:flex;gap:10px;align-items:center">
+          <div style="background:white;padding:8px 12px;border-radius:10px;font-weight:900;color:#063238">Explore</div>
+          <div style="font-weight:800;color:#063238">Handpicked holiday deals</div>
+        </div>
+
+        <h1>What is your next destination?</h1>
+        <p>Discover beaches, culture and nature across Sri Lanka. Easy booking via email or WhatsApp — no backend required.</p>
+
+        <div class="tags" aria-hidden="true">
+          <div class="tag">Beach</div><div class="tag">Train rides</div><div class="tag">Wildlife</div><div class="tag">Family</div>
+        </div>
+
+        <div style="margin-top:18px">
+          <div class="search-card" role="search">
+            <form id="searchForm" onsubmit="onSearch(event)">
+              <div class="search-grid">
+                <div class="field"><label for="dest">Destination</label><input id="dest" name="dest" placeholder="e.g., Galle, Kandy, Ella"></div>
+                <div class="field"><label for="type">Type</label><select id="type" name="type"><option value="">Any</option><option>Beach</option><option>Culture</option><option>Adventure</option></select></div>
+                <div class="field"><label for="dates">Dates</label><input id="dates" name="dates" placeholder="Anytime (no backend)"></div>
+                <div class="field"><label for="guests">Guests</label><select id="guests" name="guests"><option>1</option><option>2</option><option>3</option><option>4+</option></select></div>
+              </div>
+              <div style="display:flex;gap:10px;margin-top:12px">
+                <button class="btn btn-primary" type="submit">Search Deals</button>
+                <button class="btn btn-outline" type="button" onclick="openWhatsApp()">Chat on WhatsApp</button>
+                <a class="icon-btn" href="mailto:nilankap89@gmail.com?subject=Booking%20Enquiry%20-%20Ceylon%20Trips%20%26%20Clicks" style="margin-left:auto">Send Email</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-right">
+        <div class="hero-feature">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-weight:900">Featured: Ella & Little Adam's Peak</div>
+              <div class="muted-small">2 days • private trip</div>
+            </div>
+            <div style="text-align:right">
+              <div class="price">LKR 18,000</div>
+              <div class="muted-small">per person</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=800&auto=format&fit=crop" alt="Ella" style="width:86px;height:86px;object-fit:cover;border-radius:10px">
+            <div style="flex:1">
+              <div style="font-weight:900">Train ride & hike</div>
+              <div class="muted-small" style="margin-top:6px">Scenic views, tea plantation stops & comfortable transport.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:12px">
+            <button class="btn btn-primary" onclick="bookNow('ella')">Book Now</button>
+            <button class="btn btn-outline" onclick="prefillContact('Ella & Little Adam\\s Peak')">Enquire</button>
+          </div>
+        </div>
+
+        <div class="hero-feature" style="display:flex;gap:12px;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-weight:900">Need help planning?</div>
+            <div class="muted-small">We are available on WhatsApp & Email</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <a class="icon-btn" href="mailto:nilankap89@gmail.com">Email</a>
+            <button class="icon-btn" onclick="openWhatsApp()">WhatsApp</button>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Best holiday deals -->
+    <section id="deals" class="section" aria-labelledby="dealsHeading">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <h2 id="dealsHeading">Best holiday deals</h2>
+          <div class="muted">Handpicked packages with flexible dates and great guides</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <div class="muted-small">Filter:</div>
+          <select id="filterType" onchange="applyFilter()"><option value="">All</option><option>Beach</option><option>Culture</option><option>Adventure</option></select>
+        </div>
+      </div>
+
+      <div id="dealsGrid" class="deals-grid" aria-live="polite"></div>
+      <div style="margin-top:16px;text-align:center">
+        <button class="ghost" onclick="loadMore()">Load more</button>
+      </div>
+    </section>
+
+    <!-- Promo banner -->
+    <section class="promo section" role="region" aria-label="Promotion">
+      <div>
+        <div style="font-weight:900">Summer Special — Save 25%</div>
+        <div class="muted-small">Limited time on selected packages — book early.</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <a class="cta" href="#deals">View Deals</a>
+        <a class="ghost" href="https://www.facebook.com/profile.php?id=61577853503752&mibextid=ZbWKwL" target="_blank" rel="noopener">Facebook Page</a>
+      </div>
+    </section>
+
+    <!-- Popular cities -->
+    <section id="cities" class="section">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2>Popular Destinations</h2>
+        <div class="muted">Explore iconic spots across Sri Lanka</div>
+      </div>
+
+      <div id="citiesGrid" class="cities"></div>
+      <div style="margin-top:12px;text-align:center">
+        <button class="ghost" onclick="scrollToSection('blogs')">Browse More</button>
+      </div>
+    </section>
+
+    <!-- Book with confidence / features -->
+    <section class="section">
+      <h2>Book with confidence</h2>
+      <div class="features">
+        <div class="feature"><div class="icon">✓</div><div><div style="font-weight:900">Easy cancellations</div><div class="muted-small">Flexible changes up to 48 hrs</div></div></div>
+        <div class="feature"><div class="icon">🧭</div><div><div style="font-weight:900">Local guides</div><div class="muted-small">Experienced & friendly</div></div></div>
+        <div class="feature"><div class="icon">🔒</div><div><div style="font-weight:900">Secure contact</div><div class="muted-small">Contact via WhatsApp & Email</div></div></div>
+      </div>
+    </section>
+
+    <!-- Blogs -->
+    <section id="blogs" class="section">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h2>Travel stories & tips</h2>
+        <div class="muted">Inspiration for your next trip</div>
+      </div>
+      <div id="blogsGrid" class="blogs"></div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section">
+      <h2>What customers say</h2>
+      <div id="testimonials" class="testimonials"></div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section" aria-label="Contact">
+      <h2>Contact & Book</h2>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <p class="muted-small">Call or WhatsApp: <strong id="phoneDisplay">+94 71 301 0652</strong></p>
+          <p class="muted-small">Email: <strong>nilankap89@gmail.com</strong></p>
+
+          <!-- Contact form: will open user's email client via mailto -->
+          <form id="contactForm" onsubmit="handleMailto(event)">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <input name="name" placeholder="Your name" required />
+              <input name="email" placeholder="Your email" required />
+              <input name="phone" placeholder="Phone (optional)" />
+              <select name="pkg" id="contactPkg"><option value="">Select package (optional)</option></select>
+            </div>
+            <textarea name="message" rows="4" style="margin-top:8px" placeholder="Message or special requests"></textarea>
+            <div style="display:flex;gap:8px;margin-top:10px">
+              <button class="btn btn-primary" type="submit">Send Email</button>
+              <button type="button" class="btn btn-outline" onclick="openWhatsAppPrefilled()">Chat on WhatsApp</button>
+              <a class="icon-btn" href="https://www.facebook.com/profile.php?id=61577853503752&mibextid=ZbWKwL" target="_blank" rel="noopener">Facebook</a>
+            </div>
+            <div id="formMsg" style="margin-top:10px;color:var(--muted)"></div>
+          </form>
+        </div>
+
+        <aside class="contact-card">
+          <h3 style="margin:0 0 8px">Office</h3>
+          <div class="muted-small">Colombo, Sri Lanka<br>Mon - Sat: 08:00 - 18:00</div>
+          <div style="margin-top:12px">
+            <strong>Quick Links</strong>
+            <div style="display:flex;gap:8px;margin-top:8px" class="socials">
+              <a class="icon-btn" href="https://wa.me/94713010652" target="_blank" rel="noopener">WhatsApp</a>
+              <a class="icon-btn" href="mailto:nilankap89@gmail.com">Email</a>
+              <a class="icon-btn" href="https://www.facebook.com/profile.php?id=61577853503752&mibextid=ZbWKwL" target="_blank" rel="noopener">Facebook</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-grid container" style="max-width:var(--maxw);padding:0">
+        <div>
+          <div style="font-weight:900">Ceylon Trips & Clicks</div>
+          <div class="muted-small" style="margin-top:6px">Local guides, curated experiences across Sri Lanka</div>
+        </div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center">
+          <div class="muted-small">© <span id="year"></span> Ceylon Trips & Clicks</div>
+          <a class="muted-small" href="mailto:nilankap89@gmail.com">nilankap89@gmail.com</a>
+          <a class="muted-small" href="https://www.facebook.com/profile.php?id=61577853503752&mibextid=ZbWKwL" target="_blank" rel="noopener">Facebook</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // ----- Config: change if needed -----
+    const WHATSAPP_NUMBER = '94713010652'; // Sri Lanka format for wa.me (country code + number, no + or leading 0)
+    const CONTACT_EMAIL = 'nilankap89@gmail.com';
+    const FB_PAGE = 'https://www.facebook.com/profile.php?id=61577853503752&mibextid=ZbWKwL';
+
+    // ----- Data: packages, cities, blogs, testimonials -----
+    const packages = [
+      { id:'sigiriya', title:'Sigiriya & Dambulla Day Tour', type:'Culture', days:'1 Day', price:'LKR 7,000', img:'https://www.lovidhu.com/uploads/posts/2021/03//sigiria-sri-lanka-945x630.jpg', short:'Climb the Sigiriya rock fortress; visit Dambulla cave temple.' },
+      { id:'kandy', title:'Kandy Cultural Experience', type:'Culture', days:'1-2 Days', price:'LKR 10,000', img:'https://img.traveltriangle.com/blog/wp-content/uploads/2019/07/Kandy-Cover.jpg', short:'Visit the Temple of the Tooth & witness cultural dance.' },
+      { id:'ella', title:'Ella & Little Adam\'s Peak', type:'Adventure', days:'2 Days', price:'LKR 18,000', img:'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop', short:'Famous train ride and scenic hike with tea views.' },
+      { id:'galle', title:'Galle Fort & South Coast', type:'Beach', days:'1 Day', price:'LKR 8,500', img:'https://i0.wp.com/mytravelation.com/wp-content/uploads/2023/11/Galle.jpeg?fit=1254%2C836&ssl=1', short:'Historic fort, coastal views and calm beaches.' },
+      { id:'yala', title:'Yala Safari', type:'Adventure', days:'2 Days', price:'LKR 22,000', img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/ba/90/7f/yala-jeep-safari.jpg?w=900&h=500&s=1', short:'Safari drives for wildlife spotting — leopards & elephants.' },
+      { id:'trinco', title:'Trincomalee Beaches', type:'Beach', days:'2 Days', price:'LKR 14,500', img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop', short:'Pristine beaches and boat trips to islands.' }
+    ];
+
+    const cities = [
+      { name:'Colombo', img:'https://cdn.atrsafari.com/cdn/05explore/locations-and-lodges/asia/srilanka/colombo/0/stills/00page/01-1920.jpg' },
+      { name:'Kandy', img:'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/a9/70/52/kandy-lake-in-sri-lanka.jpg?w=1200&h=-1&s=1' },
+      { name:'Ella', img:'https://images.squarespace-cdn.com/content/v1/5a3bb03b4c326d76de73ddaa/9732566d-6b33-4a1a-ba0c-1b73ed8848a4/The+Common+Wanderer-9888.jpg' },
+      { name:'Galle', img:'https://lp-cms-production.imgix.net/2019-06/GettyImages-477728584_high.jpg?auto=format,compress&q=72&w=1095&fit=crop&crop=faces,edges' }
+    ];
+
+    const blogs = [
+      { title:'Scenic Train Ride to Ella', img:'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1200&auto=format&fit=crop', excerpt:'How to enjoy the iconic train ride — tips, seats and photo spots.' },
+      { title:'Top Beaches in Sri Lanka', img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop', excerpt:'From Mirissa to Trinco — the best sandy shores.' },
+      { title:'Cultural highlights', img:'https://wherethesoulswander.com/wp-content/uploads/2019/12/things-to-do-in-Polonnaruwa-1.jpg', excerpt:'Temples, festivals and local experiences for first-time visitors.' }
+    ];
+
+    const testimonials = [
+      { name:'Saman', text:'Fantastic guide and smooth trip. Highly recommended!', rating:5 },
+      { name:'Priya', text:'Lovely experience — great value and friendly staff.', rating:5 },
+      { name:'Arjun', text:'Very organized tour with beautiful stops!', rating:4 }
+    ];
+
+    // ----- Render functions -----
+    function renderDeals(list){
+      const grid = document.getElementById('dealsGrid');
+      grid.innerHTML = '';
+      list.forEach(p=>{
+        const card = document.createElement('article');
+        card.className = 'deal';
+        card.innerHTML = `
+          <div class="media" style="background-image:url('${p.img}')"></div>
+          <div class="body">
+            <div class="title">${p.title}</div>
+            <div class="muted-small">${p.short}</div>
+            <div class="price-row">
+              <div class="pill">${p.days}</div>
+              <div style="font-weight:900">${p.price}</div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
+              <button class="btn btn-outline" onclick="viewDetails('${p.id}')">View</button>
+              <button class="btn btn-primary" onclick="bookNow('${p.id}')">Book</button>
+              <div style="flex:1"></div>
+              <div class="muted-small">${p.type}</div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Fill contact package SELECT
+      const sel = document.getElementById('contactPkg');
+      sel.innerHTML = '<option value="">Select package (optional)</option>' + packages.map(x=>`<option value="${x.title}">${x.title}</option>`).join('');
+    }
+
+    function renderCities(){
+      const grid = document.getElementById('citiesGrid');
+      grid.innerHTML = '';
+      cities.forEach(c=>{
+        const el = document.createElement('div');
+        el.className = 'city';
+        el.style.backgroundImage = `url('${c.img}')`;
+        el.innerHTML = `<span>${c.name}</span>`;
+        el.onclick = ()=> alert('Explore ' + c.name + ' — contact via WhatsApp or Email to book.');
+        grid.appendChild(el);
+      });
+    }
+
+    function renderBlogs(){
+      const g = document.getElementById('blogsGrid');
+      g.innerHTML = '';
+      blogs.forEach(b=>{
+        const el = document.createElement('div');
+        el.className = 'blog';
+        el.innerHTML = `<img src="${b.img}" alt="${b.title}"><div class="txt"><div style="font-weight:900">${b.title}</div><div class="muted-small" style="margin-top:8px">${b.excerpt}</div><div style="margin-top:10px"><a href="#">Read more →</a></div></div>`;
+        g.appendChild(el);
+      });
+    }
+
+    function renderTestimonials(){
+      const t = document.getElementById('testimonials');
+      t.innerHTML = '';
+      testimonials.forEach(s=>{
+        const el = document.createElement('div');
+        el.className = 'test';
+        el.innerHTML = `<div style="color:#f5b942;font-weight:900">${'★'.repeat(s.rating)}${'☆'.repeat(5-s.rating)}</div><div style="margin-top:8px">${s.text}</div><div style="margin-top:10px;font-weight:900">${s.name}</div>`;
+        t.appendChild(el);
+      });
+    }
+
+    // ----- Interactions -----
+    function applyFilter(){
+      const v = document.getElementById('filterType').value;
+      if(!v) renderDeals(packages);
+      else renderDeals(packages.filter(p=>p.type===v));
+    }
+
+    function onSearch(e){
+      e.preventDefault();
+      const form = e.target;
+      const dest = form.dest.value || 'All destinations';
+      const type = form.type.value || 'Any type';
+      alert(`Searching (local demo): ${dest} — ${type}\\nThis site is front-end only. For live search, integrate a backend or CMS.`);
+    }
+
+    function viewDetails(id){
+      const p = packages.find(x=>x.id===id);
+      alert(p ? `${p.title}\\n\\n${p.short}\\nPrice: ${p.price}` : 'Details not found');
+    }
+
+    function bookNow(id){
+      const p = packages.find(x=>x.id===id);
+      if(!p) return alert('Package not found.');
+      // open mailto with prefilled subject and body
+      const subject = encodeURIComponent(`Booking enquiry: ${p.title}`);
+      const body = encodeURIComponent(`Hi Ceylon Trips & Clicks,%0A%0AI'd like to enquire about the following package:%0A- ${p.title}%0A- Dates: (please specify)%0A- Guests: (please specify)%0A%0AThanks,%0A[Your name]`);
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    }
+
+    function prefillContact(packageTitle){
+      if(packageTitle) document.getElementById('contactPkg').value = packageTitle;
+      document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+    }
+
+    // Open WhatsApp general or prefilled
+    function openWhatsApp(){
+      // open plain chat
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}`, '_blank', 'noopener');
+    }
+
+    function openWhatsAppPrefilled(){
+      const form = document.getElementById('contactForm');
+      const name = form.name.value || '[Your name]';
+      const phone = form.phone.value || '';
+      const pkg = form.pkg.value || '';
+      const msg = `Hello Ceylon Trips & Clicks, I am ${name} ${phone ? '(phone: ' + phone + ')' : ''} and I'm interested in: ${pkg || 'a package'}. Could you please provide details?`;
+      const encoded = encodeURIComponent(msg);
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, '_blank', 'noopener');
+    }
+
+    // Contact form: open user's email client (mailto) with the message
+    function handleMailto(e){
+      e.preventDefault();
+      const f = new FormData(e.target);
+      const name = f.get('name') || '';
+      const email = f.get('email') || '';
+      const phone = f.get('phone') || '';
+      const pkg = f.get('pkg') || '';
+      const message = f.get('message') || '';
+      const subject = encodeURIComponent(`Enquiry from website: ${pkg || 'General enquiry'}`);
+      const bodyParts = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Phone: ${phone}`,
+        `Package: ${pkg}`,
+        '',
+        'Message:',
+        message
+      ];
+      const body = encodeURIComponent(bodyParts.join('\\n'));
+      // open mailto
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+      // show small message to user
+      const msg = document.getElementById('formMsg');
+      msg.textContent = 'Your email client will open to send the enquiry. If nothing happens, copy the email address and contact us.';
+      setTimeout(()=>msg.textContent = '', 6000);
+    }
+
+    // small helpers
+    function scrollToSection(id){
+      document.getElementById(id).scrollIntoView({behavior:'smooth'});
+    }
+
+    function loadMore(){
+      alert('Load more — front-end demo. Add pagination or fetch from a CMS to show more packages.');
+    }
+
+    // init
+    document.getElementById('year').textContent = new Date().getFullYear();
+    renderDeals(packages);
+    renderCities();
+    renderBlogs();
+    renderTestimonials();
+
+    // set phone display
+    document.getElementById('phoneDisplay').textContent = '+94 71 301 0652';
+  </script>
+</body>
+</html>
